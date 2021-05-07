@@ -60,8 +60,19 @@ router.patch('/', (req, res) => {
       })
   })
 
-//   router.delete('/', (req, res) => {
-//     const { id } = req.body
-//     db.deleteRating({ id })
-
-//   })
+  router.delete('/', (req, res) => {
+    const { id } = req.body
+    db.deleteRating({ id })
+        .then(() => {
+            res.sendStatus(200)
+            return null
+        })
+        .catch((err) => {
+            log(err.message)
+            res.status(500).json({
+              error: {
+                title: 'Unable to delete rating'
+            }
+        })
+    })
+})

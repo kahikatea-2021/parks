@@ -31,8 +31,17 @@ function updateRating (updatedRating, db = connection) {
     })
 }
 
+function deleteRating (starRating, db = connection) {
+  const { id } = starRating
+  console.log(starRating)
+  return db('rating')
+  .where({ id: id })
+  .delete()
+}
+
 module.exports = {
   getRatingByParkId,
   addRating,
-  updateRating
+  updateRating,
+  deleteRating
 }
